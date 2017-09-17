@@ -153,7 +153,6 @@ endfunction
 " for scheduled-quench "{{{
 let s:quench_table = {}
 function! s:quench(id) abort  "{{{
-  let options = s:shift_options()
   let highlight = s:get(a:id)
   try
     if highlight != {}
@@ -168,7 +167,6 @@ function! s:quench(id) abort  "{{{
   finally
     unlet s:quench_table[a:id]
     call timer_stop(a:id)
-    call s:restore_options(options)
     redraw
   endtry
   call s:clear_autocmds()
@@ -409,31 +407,6 @@ else
     endtry
   endfunction
 endif
-"}}}
-function! s:shift_options() abort "{{{
-  let options = {}
-
-  """ tweak appearance
-  " hide_cursor
-  if s:has_gui_running
-    let options.cursor = &guicursor
-    set guicursor+=a:block-NONE
-  else
-    let options.cursor = &t_ve
-    set t_ve=
-  endif
-
-  return options
-endfunction
-"}}}
-function! s:restore_options(options) abort "{{{
-  if s:has_gui_running
-    set guicursor&
-    let &guicursor = a:options.cursor
-  else
-    let &t_ve = a:options.cursor
-  endif
-endfunction
 "}}}
 function! s:get_buf_text(region) abort  "{{{
   " NOTE: Do *not* use operator+textobject in another textobject!
