@@ -1,14 +1,17 @@
 if exists("g:loaded_highlightedyank")
-  finish
+    finish
 endif
+
 let g:loaded_highlightedyank = 1
 
 function! s:default_highlight() abort
-  highlight default link Yank Visual
+    highlight default link Yank WarningMsg
 endfunction
+
 call s:default_highlight()
+
 augroup highlightedyank
-  autocmd!
-  autocmd ColorScheme * call s:default_highlight()
-  autocmd TextYankPost * call highlightedyank#hl(v:event.regtype)
+    autocmd!
+    autocmd ColorScheme * call s:default_highlight()
+    autocmd TextYankPost * call highlightedyank#hl(v:event.regtype)
 augroup END

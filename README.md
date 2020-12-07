@@ -1,13 +1,8 @@
 # vim-highlightedyank
 
 ## Usage
-
-There is no configuration. The highlight is automatically triggered by the
-`TextYankPost` event.
-
-## Optimizing highlight duration
+Yank something and watch it
 
 ## Highlight coloring
-
-    hi HighlightedyankRegion cterm=reverse gui=reverse
-
+Default is WarningMsg because that's my preference
+hi Yank cterm=reverse gui=reverse
